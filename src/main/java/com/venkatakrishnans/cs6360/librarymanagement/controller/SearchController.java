@@ -17,7 +17,6 @@ public class SearchController {
     @Autowired
     private BookSearchService bookSearchService;
 
-
     @RequestMapping("/{searchTerm}")
     public List<BookAuthorMap> search(@PathVariable String searchTerm){
         return bookSearchService.searchBooks(searchTerm);

@@ -1,5 +1,6 @@
 package com.venkatakrishnans.cs6360.librarymanagement.Domain;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -9,10 +10,12 @@ import java.util.Date;
 
 @Data
 @Entity
+@Builder
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"bookId", "borrowerId"}))
 public class BookLoan {
 
     @Id
+    @GeneratedValue
     private String bookLoanId;
 
     @OneToOne
