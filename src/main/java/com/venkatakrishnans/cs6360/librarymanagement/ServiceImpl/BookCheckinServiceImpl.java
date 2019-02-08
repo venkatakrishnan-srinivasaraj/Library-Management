@@ -17,7 +17,7 @@ public class BookCheckinServiceImpl implements BookCheckinService {
 
      @Override
      public List<BookLoan> searchCurrentlyActiveBookLoans(String searchTerm) {
-          List<BookLoan> currentlyActiveBookLoansFilteredBySearchTerm  = bookLoanRepository.findAllByReturnDateIsNullAndBorrowerBorrowerIdContainingOrBorrowerFirstNameContainingOrBorrowerLastNameContainingOrBookIsbn10ContainingOrBookIsbn13Containing(searchTerm,searchTerm,searchTerm,searchTerm,searchTerm);
+          List<BookLoan> currentlyActiveBookLoansFilteredBySearchTerm  = bookLoanRepository.findAllByReturnDateIsNullAndBorrowerBorrowerIdContainingOrBorrowerFirstNameContainingOrBorrowerLastNameContainingOrBook_Isbn10ContainingOrBook_Isbn13Containing(searchTerm,searchTerm,searchTerm,searchTerm,searchTerm);
           return currentlyActiveBookLoansFilteredBySearchTerm;
      }
 

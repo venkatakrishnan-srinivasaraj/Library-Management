@@ -50,14 +50,14 @@ public class BookCheckoutServiceImpl implements BookCheckoutService {
 
 
      private void checkIfBorrowerIsEligibleForCheckout(Borrower borrower) throws MaximumCheckoutLimitReachedException {
-          long checkedOutBookCountForBorrower = bookLoanRepository.countAllByBorrowerIsAndAndReturnDateIsNull(borrower);
+          long checkedOutBookCountForBorrower = bookLoanRepository.countAllByBorrowerAndReturnDateIsNull(borrower);
           if(checkedOutBookCountForBorrower>=3){
                throw new MaximumCheckoutLimitReachedException();
           }
      }
 
      private void checkIfBookIsAvailableForCheckout(Book book) throws BookAlreadyCheckedOutException {
-         long checkedOutBookCount = bookLoanRepository.countAllBookIsAndReturnDateIsNull(book);
+         long checkedOutBookCount = bookLoanRepository.countAllByBookAndReturnDateIsNull(book);
          if(checkedOutBookCount>0){
               throw new BookAlreadyCheckedOutException();
          }

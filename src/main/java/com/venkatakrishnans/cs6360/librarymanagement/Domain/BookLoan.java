@@ -16,7 +16,7 @@ public class BookLoan {
 
     @Id
     @GeneratedValue
-    private String bookLoanId;
+    private long bookLoanId;
 
     @OneToOne
     @JoinColumn(name = "bookId")

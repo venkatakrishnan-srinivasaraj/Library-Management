@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public interface FineRepository extends JpaRepository<Fine,String> {
 
-    List<Fine> findAllByPaidStatusIsFalse();
+//    List<Fine> findAllByPaidStatusIsFalse();
 
     List<Fine> findAllByBookLoanIn(List<BookLoan> bookLoanList);
 

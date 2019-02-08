@@ -1,21 +1,27 @@
 package com.venkatakrishnans.cs6360.librarymanagement.Domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Date;
 
 @Data
 @Entity
 @Table
 @Builder
-public class Fine implements Serializable {
+@NoArgsConstructor
+@AllArgsConstructor
+public class Fine{
 
     @Id
+    private long fineId;
+
+    @MapsId
     @OneToOne
     @JoinColumn(name = "bookLoanId")
     private BookLoan bookLoan;

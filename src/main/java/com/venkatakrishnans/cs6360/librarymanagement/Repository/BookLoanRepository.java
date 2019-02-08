@@ -1,7 +1,6 @@
 package com.venkatakrishnans.cs6360.librarymanagement.Repository;
 
 import com.venkatakrishnans.cs6360.librarymanagement.Domain.Book;
-import com.venkatakrishnans.cs6360.librarymanagement.Domain.BookAuthorMap;
 import com.venkatakrishnans.cs6360.librarymanagement.Domain.BookLoan;
 import com.venkatakrishnans.cs6360.librarymanagement.Domain.Borrower;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,18 +12,18 @@ import java.util.List;
 @Component
 public interface BookLoanRepository extends JpaRepository<BookLoan,String> {
 
-     BookLoan findByBookIsAndReturnDateIsNull(Book book);
+//     BookLoan findByBookIsAndReturnDateIsNull(Book book,Date returnDate);
 
-     long countAllBookIsAndReturnDateIsNull(Book book);
+     long countAllByBookAndReturnDateIsNull(Book book);
 
      List<BookLoan> findAllByBookInAndReturnDateIsNull(List<Book> bookList);
 
-     long countAllByBorrowerIsAndAndReturnDateIsNull(Borrower borrower);
+     long countAllByBorrowerAndReturnDateIsNull(Borrower borrower);
 
-     List<BookLoan> findAllByBorrowerIsAndAndReturnDateIsNotNull(Borrower borrower, Date returnDate);
+//     List<BookLoan> findAllByBorrowerBorrowerIdIsAndAndReturnDateIsNotNull(String borrowerId, Date returnDate);
 
      List<BookLoan> findAllByReturnDateIsNull();
 
-     List<BookLoan> findAllByReturnDateIsNullAndBorrowerBorrowerIdContainingOrBorrowerFirstNameContainingOrBorrowerLastNameContainingOrBookIsbn10ContainingOrBookIsbn13Containing(String borrowerId,String firstName,String lastName,String isbn10,String isbn13);
+     List<BookLoan> findAllByReturnDateIsNullAndBorrowerBorrowerIdContainingOrBorrowerFirstNameContainingOrBorrowerLastNameContainingOrBook_Isbn10ContainingOrBook_Isbn13Containing(String borrowerId,String firstName,String lastName,String isbn10,String isbn13);
 
 }

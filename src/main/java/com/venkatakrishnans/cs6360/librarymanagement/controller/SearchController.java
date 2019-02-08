@@ -1,6 +1,5 @@
 package com.venkatakrishnans.cs6360.librarymanagement.controller;
 
-import com.venkatakrishnans.cs6360.librarymanagement.Domain.Book;
 import com.venkatakrishnans.cs6360.librarymanagement.Domain.BookAuthorMap;
 import com.venkatakrishnans.cs6360.librarymanagement.Service.BookSearchService;
 import org.springframework.beans.factory.annotation.Autowired;

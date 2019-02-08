@@ -4,5 +4,5 @@ import java.io.Serializable;
 
 public class BookAuthorKey implements Serializable {
     protected String book;
-    protected String author;
+    protected long author;
 }
