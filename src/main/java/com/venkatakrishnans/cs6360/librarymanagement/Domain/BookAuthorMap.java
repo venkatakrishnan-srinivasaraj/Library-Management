@@ -7,7 +7,6 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
-//@Table(uniqueConstraints={@UniqueConstraint(columnNames = {"bookId","authorId"})})
 @Table
 @IdClass(BookAuthorKey.class)
 public class BookAuthorMap {

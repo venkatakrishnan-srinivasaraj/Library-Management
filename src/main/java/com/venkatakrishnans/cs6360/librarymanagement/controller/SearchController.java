@@ -4,20 +4,22 @@ import com.venkatakrishnans.cs6360.librarymanagement.Domain.Book;
 import com.venkatakrishnans.cs6360.librarymanagement.Domain.BookAuthorMap;
 import com.venkatakrishnans.cs6360.librarymanagement.Service.BookSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-public class HomeController {
+@RequestMapping("/search")
+public class SearchController {
 
     @Autowired
     private BookSearchService bookSearchService;
 
 
-    @RequestMapping("/")
-    public List<BookAuthorMap> home(){
-        return bookSearchService.getAllBooks();
+    @RequestMapping("/{searchTerm}")
+    public List<BookAuthorMap> search(@PathVariable String searchTerm){
+        return bookSearchService.searchBooks(searchTerm);
     }
 }
