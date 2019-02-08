@@ -1,7 +1,7 @@
 package com.venkatakrishnans.cs6360.librarymanagement.controller;
 
 import com.venkatakrishnans.cs6360.librarymanagement.Domain.Book;
-import com.venkatakrishnans.cs6360.librarymanagement.Service.BookService;
+import com.venkatakrishnans.cs6360.librarymanagement.Service.BookSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,11 +12,11 @@ import java.util.List;
 public class HomeController {
 
     @Autowired
-    private BookService bookService;
+    private BookSearchService bookSearchService;
 
 
     @RequestMapping("/")
     public List<Book> home(){
-        return bookService.getAllBooks();
+        return bookSearchService.getAllBooks();
     }
 }

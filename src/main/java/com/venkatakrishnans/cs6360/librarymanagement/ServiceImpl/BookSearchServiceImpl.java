@@ -1,14 +1,15 @@
-package com.venkatakrishnans.cs6360.librarymanagement.Service;
+package com.venkatakrishnans.cs6360.librarymanagement.ServiceImpl;
 
 import com.venkatakrishnans.cs6360.librarymanagement.Domain.Book;
 import com.venkatakrishnans.cs6360.librarymanagement.Repository.BookRepository;
+import com.venkatakrishnans.cs6360.librarymanagement.Service.BookSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class BookServiceImpl implements BookService {
+public class BookSearchServiceImpl implements BookSearchService {
 
     @Autowired
     private BookRepository bookRepository;
