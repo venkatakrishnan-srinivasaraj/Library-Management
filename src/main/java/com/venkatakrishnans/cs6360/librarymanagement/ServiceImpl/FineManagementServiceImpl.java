@@ -30,7 +30,7 @@ public class FineManagementServiceImpl implements FineManagementService {
     @Override
     public void calculateAndUpdateFineForAllBookLoans() {
         List<BookLoan> listOfActiveBookLoans = bookLoanRepository.findAllByReturnDateIsNull();
-        List<Fine> listOfExistingFines = fineRepository.findAllByBookLoanIn(listOfActiveBookLoans);
+        List<Fine> listOfExistingFines = fineRepository.findAllByBookLoan_BookLoanIdIn(listOfActiveBookLoans.stream().map(each->each.getBookLoanId()).collect(Collectors.toList()));
 
         listOfExistingFines.stream().forEach(each->{
             each.setFineAmount(fineCalculatorService.calculateFineForBookLoan(each.getBookLoan()));
@@ -48,7 +48,9 @@ public class FineManagementServiceImpl implements FineManagementService {
                         .fineAmount(fineCalculatorService.calculateFineForBookLoan(each))
                         .paidStatus(false)
                         .build();
-            listOfNewFines.add(fine);
+            if(fine.getFineAmount()>0){
+                listOfNewFines.add(fine);
+            }
         });
 
         fineRepository.saveAll(listOfExistingFines);
@@ -72,7 +74,7 @@ public class FineManagementServiceImpl implements FineManagementService {
         if(amountPaid<0){
             throw new InvalidPaymentAmountException();
         }
-        List<Fine> listOfUnpaidFinesByBorrowerForReturnedBooks = fineRepository.findAllByBookLoan_BorrowerAndBookLoanReturnDateIsNotNullAndPaidStatusIsFalse(borrower);
+        List<Fine> listOfUnpaidFinesByBorrowerForReturnedBooks = fineRepository.findAllByBookLoan_Borrower_BorrowerIdAndBookLoanReturnDateIsNotNullAndPaidStatusIsFalse(borrower.getBorrowerId());
 
         listOfUnpaidFinesByBorrowerForReturnedBooks.stream().sorted((each1,each2)->{
             if(each1.getFineAmount() < each2.getFineAmount()){

@@ -1,16 +1,19 @@
 package com.venkatakrishnans.cs6360.librarymanagement.Domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
 @Entity
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"bookId", "borrowerId"}))
 public class BookLoan {
 
@@ -27,11 +30,9 @@ public class BookLoan {
     private Borrower borrower;
 
     @NotNull
-    @NotEmpty
     private Date checkoutDate;
 
     @NotNull
-    @NotEmpty
     private Date dueDate;
 
     private Date returnDate;

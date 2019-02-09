@@ -6,9 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 
 @Data
 @Entity
@@ -27,11 +25,9 @@ public class Fine{
     private BookLoan bookLoan;
 
     @NotNull
-    @NotEmpty
     private double fineAmount;
 
     @NotNull
-    @NotEmpty
     private boolean paidStatus;
 
 }

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 @Component
 public interface BorrowerRepository extends JpaRepository<Borrower,String> {
 
+    Borrower findByBorrowerId(String borrowerId);
+
     Borrower findBySsn(String ssn);
 
 }

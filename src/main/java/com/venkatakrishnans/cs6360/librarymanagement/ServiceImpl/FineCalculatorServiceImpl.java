@@ -27,15 +27,17 @@ public class FineCalculatorServiceImpl implements FineCalculatorService {
      @Override
      public double calculateFineForBookLoan(BookLoan bookLoan) {
           if(bookLoan.getReturnDate()==null){
-               long durationInDaysOfBookBorrowed = DateTimeUtility.getDateDifferenceBetweenTwoDates(DateTimeUtility.getCurrentDate(),bookLoan.getCheckoutDate(), TimeUnit.DAYS);
+               long durationInDaysOfBookBorrowed = DateTimeUtility.getDateDifferenceBetweenTwoDates(bookLoan.getCheckoutDate(),DateTimeUtility.getCurrentDate(), TimeUnit.DAYS);
                if(durationInDaysOfBookBorrowed>DEFAULT_BOOK_BORROWING_PERIOD){
                     double fine = durationInDaysOfBookBorrowed * FINE_PER_DAY;
+                    return fine;
                }
                return 0;
           }else{
                long durationInDaysOfBookBorrowed = DateTimeUtility.getDateDifferenceBetweenTwoDates(bookLoan.getReturnDate(),bookLoan.getCheckoutDate(), TimeUnit.DAYS);
                if(durationInDaysOfBookBorrowed>DEFAULT_BOOK_BORROWING_PERIOD){
                     double fine = durationInDaysOfBookBorrowed * FINE_PER_DAY;
+                    return fine;
                }
                return 0;
           }
@@ -50,7 +52,7 @@ public class FineCalculatorServiceImpl implements FineCalculatorService {
 
      @Override
      public double calculatePayableFineAmountForABorrower(Borrower borrower) {
-          List<Fine> listOfPayableFinesByBorrower = fineRepository.findAllByBookLoan_BorrowerAndBookLoanReturnDateIsNotNullAndPaidStatusIsFalse(borrower);
+          List<Fine> listOfPayableFinesByBorrower = fineRepository.findAllByBookLoan_Borrower_BorrowerIdAndBookLoanReturnDateIsNotNullAndPaidStatusIsFalse(borrower.getBorrowerId());
           double totalPayableLoanAmount = listOfPayableFinesByBorrower.stream().mapToDouble(each->each.getFineAmount()).sum();
           return totalPayableLoanAmount;
      }

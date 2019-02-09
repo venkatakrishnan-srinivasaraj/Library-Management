@@ -2,14 +2,16 @@ package com.venkatakrishnans.cs6360.librarymanagement.Util;
 
 import org.apache.commons.lang.time.DateUtils;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class DateTimeUtility {
 
     public static Date getCurrentDate() {
-        return new Date(LocalDate.now().toEpochDay());
+
+//        return new Date(LocalDate.now().toEpochDay());
+
+        return new Date();
     }
 
     public static Date incrementDateBy(Date date,int daysToIncrement) {

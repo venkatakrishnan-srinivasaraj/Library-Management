@@ -1,22 +1,17 @@
 package com.venkatakrishnans.cs6360.librarymanagement.ServiceImpl;
 
-import com.venkatakrishnans.cs6360.librarymanagement.Domain.*;
+import com.venkatakrishnans.cs6360.librarymanagement.Domain.Book;
+import com.venkatakrishnans.cs6360.librarymanagement.Domain.BookLoan;
+import com.venkatakrishnans.cs6360.librarymanagement.Domain.Borrower;
 import com.venkatakrishnans.cs6360.librarymanagement.Exception.BookAlreadyCheckedOutException;
 import com.venkatakrishnans.cs6360.librarymanagement.Exception.MaximumCheckoutLimitReachedException;
-import com.venkatakrishnans.cs6360.librarymanagement.Repository.BookAuthorMapRepository;
 import com.venkatakrishnans.cs6360.librarymanagement.Repository.BookLoanRepository;
 import com.venkatakrishnans.cs6360.librarymanagement.Service.BookCheckoutService;
-import com.venkatakrishnans.cs6360.librarymanagement.Service.BookSearchService;
 import com.venkatakrishnans.cs6360.librarymanagement.Util.DateTimeUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.thymeleaf.util.DateUtils;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class BookCheckoutServiceImpl implements BookCheckoutService {
@@ -52,14 +47,14 @@ public class BookCheckoutServiceImpl implements BookCheckoutService {
      private void checkIfBorrowerIsEligibleForCheckout(Borrower borrower) throws MaximumCheckoutLimitReachedException {
           long checkedOutBookCountForBorrower = bookLoanRepository.countAllByBorrowerAndReturnDateIsNull(borrower);
           if(checkedOutBookCountForBorrower>=3){
-               throw new MaximumCheckoutLimitReachedException();
+               throw new MaximumCheckoutLimitReachedException("Maximum limit is reached for the user to checkout books");
           }
      }
 
      private void checkIfBookIsAvailableForCheckout(Book book) throws BookAlreadyCheckedOutException {
          long checkedOutBookCount = bookLoanRepository.countAllByBookAndReturnDateIsNull(book);
          if(checkedOutBookCount>0){
-              throw new BookAlreadyCheckedOutException();
+              throw new BookAlreadyCheckedOutException("Book is already checked-out and not available for checkout");
          }
      }
 }

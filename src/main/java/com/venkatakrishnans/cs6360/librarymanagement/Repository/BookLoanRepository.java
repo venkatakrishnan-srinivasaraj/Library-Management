@@ -6,7 +6,6 @@ import com.venkatakrishnans.cs6360.librarymanagement.Domain.Borrower;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
 import java.util.List;
 
 @Component
@@ -14,9 +13,11 @@ public interface BookLoanRepository extends JpaRepository<BookLoan,String> {
 
 //     BookLoan findByBookIsAndReturnDateIsNull(Book book,Date returnDate);
 
+     BookLoan findByBookLoanId(long bookLoanId);
+
      long countAllByBookAndReturnDateIsNull(Book book);
 
-     List<BookLoan> findAllByBookInAndReturnDateIsNull(List<Book> bookList);
+     List<BookLoan> findAllByBookInAndReturnDateIsNotNull(List<Book> bookList);
 
      long countAllByBorrowerAndReturnDateIsNull(Borrower borrower);
 

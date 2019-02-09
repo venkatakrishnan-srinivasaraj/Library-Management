@@ -43,15 +43,16 @@ public class BookSearchServiceImpl implements BookSearchService {
 
      private List<BookStatusResponse> constructBookAvailabilityStatusResponse(List<BookAuthorMap> listOfBookAuthorMap) {
           List<BookStatusResponse> bookStatusResponseList = new ArrayList<>();
-          List<BookLoan> listOfAvailableBooks = bookLoanRepository.findAllByBookInAndReturnDateIsNull(listOfBookAuthorMap.stream().map(each->each.getBook()).collect(Collectors.toList()));
+          List<BookLoan> listOfUnAvailableBooks = bookLoanRepository.findAllByBookInAndReturnDateIsNotNull(listOfBookAuthorMap.stream().map(each->each.getBook()).collect(Collectors.toList()));
           listOfBookAuthorMap.stream().forEach(each->{
                BookStatusResponse bookStatusResponse = new BookStatusResponse();
                bookStatusResponse.setBookAuthorMap(each);
-               if(listOfAvailableBooks.contains(each.getBook())){
-                    bookStatusResponse.setBookAvailableForBorrowing(true);
-               }else{
+               if(listOfUnAvailableBooks.contains(each.getBook())){
                     bookStatusResponse.setBookAvailableForBorrowing(false);
+               }else{
+                    bookStatusResponse.setBookAvailableForBorrowing(true);
                }
+               bookStatusResponseList.add(bookStatusResponse);
           });
           return bookStatusResponseList;
      }

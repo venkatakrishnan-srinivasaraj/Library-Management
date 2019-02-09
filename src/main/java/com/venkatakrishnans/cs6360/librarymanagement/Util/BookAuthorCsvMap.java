@@ -36,7 +36,7 @@ public class BookAuthorCsvMap {
 
     @CsvBindByName(column = "Pages")
     @CsvBindByPosition(position = 6)
-    private String pages;
+    private int pages;
 
     public BookAuthorMap toBookAuthorMap(){
         Author author = Author.builder().name(authorName).build();
@@ -45,7 +45,7 @@ public class BookAuthorCsvMap {
                 .title(title)
                 .coverUrl(coverUrl)
                 .publisher(publisherName)
-                .pages(Integer.parseInt(pages))
+                .pages(pages)
                 .build();
         return BookAuthorMap.builder().author(author).book(book).build();
     }

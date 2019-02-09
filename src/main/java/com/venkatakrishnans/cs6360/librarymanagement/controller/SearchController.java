@@ -1,6 +1,6 @@
 package com.venkatakrishnans.cs6360.librarymanagement.controller;
 
-import com.venkatakrishnans.cs6360.librarymanagement.Domain.BookAuthorMap;
+import com.venkatakrishnans.cs6360.librarymanagement.Domain.BookStatusResponse;
 import com.venkatakrishnans.cs6360.librarymanagement.Service.BookSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +17,7 @@ public class SearchController {
     private BookSearchService bookSearchService;
 
     @RequestMapping("/{searchTerm}")
-    public List<BookAuthorMap> search(@PathVariable String searchTerm){
-        return bookSearchService.searchBooks(searchTerm);
+    public List<BookStatusResponse> search(@PathVariable String searchTerm){
+        return bookSearchService.searchBooksWithAvailabiltyStatus(searchTerm);
     }
 }
