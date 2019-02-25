@@ -1,8 +1,8 @@
 package com.venkatakrishnans.cs6360.librarymanagement.controller;
 
-import com.venkatakrishnans.cs6360.librarymanagement.Domain.BookLoan;
-import com.venkatakrishnans.cs6360.librarymanagement.Repository.BookLoanRepository;
-import com.venkatakrishnans.cs6360.librarymanagement.Service.BookCheckinService;
+import com.venkatakrishnans.cs6360.librarymanagement.domain.BookLoan;
+import com.venkatakrishnans.cs6360.librarymanagement.repository.BookLoanRepository;
+import com.venkatakrishnans.cs6360.librarymanagement.service.BookCheckinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

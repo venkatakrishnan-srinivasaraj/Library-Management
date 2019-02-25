@@ -1,6 +1,6 @@
 package com.venkatakrishnans.cs6360.librarymanagement.controller;
 
-import com.venkatakrishnans.cs6360.librarymanagement.Service.LibraryDataImportService;
+import com.venkatakrishnans.cs6360.librarymanagement.service.LibraryDataImportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

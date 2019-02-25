@@ -1,9 +1,9 @@
 package com.venkatakrishnans.cs6360.librarymanagement.controller;
 
-import com.venkatakrishnans.cs6360.librarymanagement.Domain.Borrower;
-import com.venkatakrishnans.cs6360.librarymanagement.Service.BorrowerService;
-import com.venkatakrishnans.cs6360.librarymanagement.Service.FineCalculatorService;
-import com.venkatakrishnans.cs6360.librarymanagement.Service.FineManagementService;
+import com.venkatakrishnans.cs6360.librarymanagement.domain.Borrower;
+import com.venkatakrishnans.cs6360.librarymanagement.service.BorrowerService;
+import com.venkatakrishnans.cs6360.librarymanagement.service.FineCalculatorService;
+import com.venkatakrishnans.cs6360.librarymanagement.service.FineManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

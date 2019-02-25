@@ -1,7 +1,7 @@
 package com.venkatakrishnans.cs6360.librarymanagement.controller;
 
-import com.venkatakrishnans.cs6360.librarymanagement.Domain.BookStatusResponse;
-import com.venkatakrishnans.cs6360.librarymanagement.Service.BookSearchService;
+import com.venkatakrishnans.cs6360.librarymanagement.domain.BookStatusResponse;
+import com.venkatakrishnans.cs6360.librarymanagement.service.BookSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

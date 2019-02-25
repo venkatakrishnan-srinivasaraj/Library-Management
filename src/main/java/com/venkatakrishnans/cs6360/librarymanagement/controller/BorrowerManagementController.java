@@ -1,9 +1,9 @@
 package com.venkatakrishnans.cs6360.librarymanagement.controller;
 
-import com.venkatakrishnans.cs6360.librarymanagement.Domain.Borrower;
-import com.venkatakrishnans.cs6360.librarymanagement.Exception.SsnAlreadyExistsException;
-import com.venkatakrishnans.cs6360.librarymanagement.Repository.BookLoanRepository;
-import com.venkatakrishnans.cs6360.librarymanagement.Service.BorrowerManagementService;
+import com.venkatakrishnans.cs6360.librarymanagement.domain.Borrower;
+import com.venkatakrishnans.cs6360.librarymanagement.exception.SsnAlreadyExistsException;
+import com.venkatakrishnans.cs6360.librarymanagement.repository.BookLoanRepository;
+import com.venkatakrishnans.cs6360.librarymanagement.service.BorrowerManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
