@@ -24,8 +24,6 @@ public class Author {
     @GeneratedValue
     private long authorId;
 
-    @NotNull
-    @NotEmpty
     private String name;
 
 }

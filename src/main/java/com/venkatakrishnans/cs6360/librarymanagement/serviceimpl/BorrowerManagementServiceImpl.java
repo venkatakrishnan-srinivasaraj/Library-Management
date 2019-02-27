@@ -21,4 +21,9 @@ public class BorrowerManagementServiceImpl implements BorrowerManagementService 
           }
           borrowerRepository.save(borrower);
      }
+
+     @Override
+     public Borrower findByBorrowerId(String borrowerId) {
+          return borrowerRepository.findByBorrowerId(borrowerId);
+     }
 }

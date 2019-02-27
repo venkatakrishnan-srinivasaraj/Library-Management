@@ -6,4 +6,6 @@ import com.venkatakrishnans.cs6360.librarymanagement.exception.SsnAlreadyExistsE
 public interface BorrowerManagementService {
 
     void createBorrower(Borrower borrower) throws SsnAlreadyExistsException;
+
+    Borrower findByBorrowerId(String borrowerId);
 }

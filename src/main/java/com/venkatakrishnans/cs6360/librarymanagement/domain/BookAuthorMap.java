@@ -17,12 +17,14 @@ import javax.persistence.*;
 public class BookAuthorMap {
 
     @Id
+//    @OneToOne
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "bookId")
     private Book book;
 
     @Id
     @OneToOne(cascade = CascadeType.ALL)
+//    @OneToOne
     @JoinColumn(name = "authorId")
     private Author author;
 

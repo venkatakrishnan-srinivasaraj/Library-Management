@@ -7,5 +7,5 @@ public class BookCheckoutRequest {
 
     private String isbn13;
 
-    private long borrowerId;
+    private String borrowerId;
 }

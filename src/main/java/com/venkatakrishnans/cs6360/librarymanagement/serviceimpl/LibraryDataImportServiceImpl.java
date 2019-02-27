@@ -2,9 +2,13 @@ package com.venkatakrishnans.cs6360.librarymanagement.serviceimpl;
 
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
+import com.venkatakrishnans.cs6360.librarymanagement.domain.Author;
+import com.venkatakrishnans.cs6360.librarymanagement.domain.Book;
 import com.venkatakrishnans.cs6360.librarymanagement.domain.BookAuthorMap;
 import com.venkatakrishnans.cs6360.librarymanagement.domain.Borrower;
+import com.venkatakrishnans.cs6360.librarymanagement.repository.AuthorRepository;
 import com.venkatakrishnans.cs6360.librarymanagement.repository.BookAuthorMapRepository;
+import com.venkatakrishnans.cs6360.librarymanagement.repository.BookRepository;
 import com.venkatakrishnans.cs6360.librarymanagement.repository.BorrowerRepository;
 import com.venkatakrishnans.cs6360.librarymanagement.service.LibraryDataImportService;
 import com.venkatakrishnans.cs6360.librarymanagement.util.BookAuthorCsvMap;
@@ -23,13 +27,19 @@ import java.util.stream.Collectors;
 public class LibraryDataImportServiceImpl implements LibraryDataImportService {
 
     //To-do change to application properties
-    private static final String SAMPLE_CSV_FILE_PATH_BOOKS = "C:\\Java Workspace\\Library-Management\\src\\main\\resources\\data\\samplebooks.csv";
+    private static final String SAMPLE_CSV_FILE_PATH_BOOKS = "C:\\Java Workspace\\Library-Management\\src\\main\\resources\\data\\books.csv";
 
     //To-do change to application properties
-    private static final String SAMPLE_CSV_FILE_PATH_BORROWER = "C:\\Java Workspace\\Library-Management\\src\\main\\resources\\data\\sampleborrowers.csv";
+    private static final String SAMPLE_CSV_FILE_PATH_BORROWER = "C:\\Java Workspace\\Library-Management\\src\\main\\resources\\data\\borrowers.csv";
 
     @Autowired
     private BookAuthorMapRepository bookAuthorMapRepository;
+
+    @Autowired
+    private BookRepository bookRepository;
+
+    @Autowired
+    private AuthorRepository authorRepository;
 
     @Autowired
     private BorrowerRepository borrowerRepository;
@@ -46,7 +56,20 @@ public class LibraryDataImportServiceImpl implements LibraryDataImportService {
 
             List<BookAuthorCsvMap> bookAuthorCsvMapList = csvToBean.parse();
 
-            List<BookAuthorMap> bookAuthorMapList = bookAuthorCsvMapList.stream().map(each -> each.toBookAuthorMap()).collect(Collectors.toList());
+            List<BookAuthorMap> bookAuthorMapList = bookAuthorCsvMapList.parallelStream().map(BookAuthorCsvMap::toBookAuthorMap).collect(Collectors.toList());
+
+//            List<Book> bookList = bookAuthorMapList.parallelStream().map(each->each.getBook()).collect(Collectors.toList());
+//
+//            List<Author> authorList = bookAuthorMapList.parallelStream().map(each->each.getAuthor()).collect(Collectors.toList());
+
+//            List<BookAuthorMap> invalid = bookAuthorMapList.parallelStream().filter(each -> each.getAuthor().getName() == null).collect(Collectors.toList());
+//
+//            System.out.println(invalid);
+
+//            bookRepository.saveAll(bookList);
+//
+//            authorRepository.saveAll(authorList);
+
             bookAuthorMapRepository.saveAll(bookAuthorMapList);
         } catch (IOException e) {
             e.printStackTrace();

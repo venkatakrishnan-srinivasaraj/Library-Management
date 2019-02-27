@@ -14,18 +14,17 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"bookId", "borrowerId"}))
 public class BookLoan {
 
     @Id
     @GeneratedValue
     private long bookLoanId;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "bookId")
     private Book book;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "borrowerId")
     private Borrower borrower;
 

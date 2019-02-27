@@ -10,10 +10,7 @@ import com.venkatakrishnans.cs6360.librarymanagement.service.BookCheckoutService
 import com.venkatakrishnans.cs6360.librarymanagement.service.BookService;
 import com.venkatakrishnans.cs6360.librarymanagement.service.BorrowerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/book/checkout")
@@ -28,11 +25,12 @@ public class BookCheckoutController {
     @Autowired
     private BorrowerService borrowerService;
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/")
     @PostMapping
     public BookCheckoutResponse checkoutBook(@RequestBody BookCheckoutRequest bookCheckoutRequest){
         Book book = bookService.findBookByIsbn13(bookCheckoutRequest.getIsbn13());
-        Borrower borrower = borrowerService.findBorrowerByBorrowerId(String.valueOf(bookCheckoutRequest.getBorrowerId()));
+        Borrower borrower = borrowerService.findBorrowerByBorrowerId(bookCheckoutRequest.getBorrowerId());
         BookCheckoutResponse bookCheckoutResponse = new BookCheckoutResponse();
         if(borrower==null){
             bookCheckoutResponse.setCheckoutStatus("failure");

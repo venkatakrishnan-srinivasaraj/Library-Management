@@ -1,11 +1,10 @@
 package com.venkatakrishnans.cs6360.librarymanagement.serviceimpl;
 
-import com.venkatakrishnans.cs6360.librarymanagement.domain.BookLoan;
-import com.venkatakrishnans.cs6360.librarymanagement.domain.Borrower;
-import com.venkatakrishnans.cs6360.librarymanagement.domain.Fine;
+import com.venkatakrishnans.cs6360.librarymanagement.domain.*;
 import com.venkatakrishnans.cs6360.librarymanagement.exception.InvalidPaymentAmountException;
 import com.venkatakrishnans.cs6360.librarymanagement.repository.BookLoanRepository;
 import com.venkatakrishnans.cs6360.librarymanagement.repository.FineRepository;
+import com.venkatakrishnans.cs6360.librarymanagement.service.BorrowerService;
 import com.venkatakrishnans.cs6360.librarymanagement.service.FineCalculatorService;
 import com.venkatakrishnans.cs6360.librarymanagement.service.FineManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,6 +23,9 @@ public class FineManagementServiceImpl implements FineManagementService {
 
     @Autowired
     FineRepository fineRepository;
+
+    @Autowired
+    BorrowerService borrowerService;
 
     @Autowired
     BookLoanRepository bookLoanRepository;
@@ -55,6 +58,38 @@ public class FineManagementServiceImpl implements FineManagementService {
 
         fineRepository.saveAll(listOfExistingFines);
         fineRepository.saveAll(listOfNewFines);
+    }
+
+    @Override
+    public FineByBorrower getFineByBorrower(String borrowerId) {
+        FineByBorrower fineByBorrower = new FineByBorrower();
+        Borrower borrower = borrowerService.findBorrowerByBorrowerId(borrowerId);
+        if(borrower==null){
+            return null;
+        }
+        List<Fine> listOfUnpaidFinesByBorrowerForReturnedBooks = fineRepository.findAllByBookLoan_Borrower_BorrowerIdAndBookLoanReturnDateIsNotNullAndPaidStatusIsFalse(borrowerId);
+        if(listOfUnpaidFinesByBorrowerForReturnedBooks==null){
+            return null;
+        }
+        fineByBorrower.setBorrower(borrower);
+        fineByBorrower.setFines(listOfUnpaidFinesByBorrowerForReturnedBooks);
+        TotalFine totalFine = new TotalFine();
+        Double totalPayableFine = listOfUnpaidFinesByBorrowerForReturnedBooks.stream().mapToDouble(each->each.getFineAmount()).sum();
+        totalFine.setPayableFine(totalPayableFine);
+        fineByBorrower.setTotalFine(totalFine);
+        return fineByBorrower;
+    }
+
+    @Override
+    public void payFinesForAllReturnedBooksByBorrower(String borrowerId) {
+        List<Fine> listOfUnpaidFinesByBorrowerForReturnedBooks = fineRepository.findAllByBookLoan_Borrower_BorrowerIdAndBookLoanReturnDateIsNotNullAndPaidStatusIsFalse(borrowerId);
+        if(listOfUnpaidFinesByBorrowerForReturnedBooks==null){
+            return;
+        }
+        listOfUnpaidFinesByBorrowerForReturnedBooks.stream().forEach(each->{
+            each.setPaidStatus(true);
+        });
+        fineRepository.saveAll(listOfUnpaidFinesByBorrowerForReturnedBooks);
     }
 
     private void makePaymentTowardsFine(Fine fine,Double amountPaid) throws InvalidPaymentAmountException {
