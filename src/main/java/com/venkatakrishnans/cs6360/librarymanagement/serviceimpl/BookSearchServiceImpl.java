@@ -1,5 +1,6 @@
 package com.venkatakrishnans.cs6360.librarymanagement.serviceimpl;
 
+import com.venkatakrishnans.cs6360.librarymanagement.domain.Book;
 import com.venkatakrishnans.cs6360.librarymanagement.domain.BookAuthorMap;
 import com.venkatakrishnans.cs6360.librarymanagement.domain.BookLoan;
 import com.venkatakrishnans.cs6360.librarymanagement.domain.BookStatusResponse;
@@ -43,11 +44,15 @@ public class BookSearchServiceImpl implements BookSearchService {
 
      private List<BookStatusResponse> constructBookAvailabilityStatusResponse(List<BookAuthorMap> listOfBookAuthorMap) {
           List<BookStatusResponse> bookStatusResponseList = new ArrayList<>();
-          List<BookLoan> listOfUnAvailableBooks = bookLoanRepository.findAllByBookInAndReturnDateIsNotNull(listOfBookAuthorMap.stream().map(each->each.getBook()).collect(Collectors.toList()));
+          List<BookLoan> listOfActiveBookLoans = bookLoanRepository.findAllByBookInAndReturnDateIsNull(listOfBookAuthorMap.stream().map(each->each.getBook()).collect(Collectors.toList()));
+
+          List<Book> listOfBooksRentedOut = listOfActiveBookLoans.stream().map(each -> each.getBook()).collect(Collectors.toList());
+
+
           listOfBookAuthorMap.stream().forEach(each->{
                BookStatusResponse bookStatusResponse = new BookStatusResponse();
                bookStatusResponse.setBookAuthorMap(each);
-               if(listOfUnAvailableBooks.contains(each.getBook())){
+               if(listOfBooksRentedOut != null && listOfBooksRentedOut.contains(each.getBook())){
                     bookStatusResponse.setBookAvailableForBorrowing(false);
                }else{
                     bookStatusResponse.setBookAvailableForBorrowing(true);

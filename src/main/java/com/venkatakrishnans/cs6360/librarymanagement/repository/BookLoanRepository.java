@@ -19,6 +19,9 @@ public interface BookLoanRepository extends JpaRepository<BookLoan,String> {
 
      List<BookLoan> findAllByBookInAndReturnDateIsNotNull(List<Book> bookList);
 
+     //new
+     List<BookLoan> findAllByBookInAndReturnDateIsNull(List<Book> bookList);
+
      long countAllByBorrowerAndReturnDateIsNull(Borrower borrower);
 
 //     List<BookLoan> findAllByBorrowerBorrowerIdIsAndAndReturnDateIsNotNull(String borrowerId, Date returnDate);
