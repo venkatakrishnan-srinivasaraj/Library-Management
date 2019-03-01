@@ -3,6 +3,7 @@ package com.venkatakrishnans.cs6360.librarymanagement.controller;
 import com.venkatakrishnans.cs6360.librarymanagement.domain.BookLoan;
 import com.venkatakrishnans.cs6360.librarymanagement.repository.BookLoanRepository;
 import com.venkatakrishnans.cs6360.librarymanagement.service.BookCheckinService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,15 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/book/checkin")
 public class BookCheckinController {
 
-    @Autowired
-    private BookCheckinService bookCheckinService;
+    private final BookCheckinService bookCheckinService;
 
-    @Autowired
-    private BookLoanRepository bookLoanRepository;
+    private final BookLoanRepository bookLoanRepository;
 
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/search/{searchTerm}")

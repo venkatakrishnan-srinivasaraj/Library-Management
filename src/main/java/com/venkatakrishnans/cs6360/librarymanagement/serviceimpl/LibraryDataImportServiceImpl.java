@@ -27,10 +27,10 @@ import java.util.stream.Collectors;
 public class LibraryDataImportServiceImpl implements LibraryDataImportService {
 
     //To-do change to application properties
-    private static final String SAMPLE_CSV_FILE_PATH_BOOKS = "C:\\Java Workspace\\Library-Management\\src\\main\\resources\\data\\books.csv";
+    private static final String SAMPLE_CSV_FILE_PATH_BOOKS = "/Users/venkatakrishnansrinivasaraj/IdeaProjects/Library-Management/src/main/resources/data/books.csv";
 
     //To-do change to application properties
-    private static final String SAMPLE_CSV_FILE_PATH_BORROWER = "C:\\Java Workspace\\Library-Management\\src\\main\\resources\\data\\borrowers.csv";
+    private static final String SAMPLE_CSV_FILE_PATH_BORROWER = "/Users/venkatakrishnansrinivasaraj/IdeaProjects/Library-Management/src/main/resources/data/borrowers.csv";
 
     @Autowired
     private BookAuthorMapRepository bookAuthorMapRepository;
