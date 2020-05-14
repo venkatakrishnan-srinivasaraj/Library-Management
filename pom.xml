@@ -80,7 +80,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <image>
-                        <name>venkatakrishnnan/${project.artifactId}</name>
+                        <name>venkatakrishnan/${project.artifactId}</name>
                     </image>
                 </configuration>
             </plugin>
