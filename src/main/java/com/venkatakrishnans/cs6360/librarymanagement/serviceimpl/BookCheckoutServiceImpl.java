@@ -8,19 +8,20 @@ import com.venkatakrishnans.cs6360.librarymanagement.exception.MaximumCheckoutLi
 import com.venkatakrishnans.cs6360.librarymanagement.repository.BookLoanRepository;
 import com.venkatakrishnans.cs6360.librarymanagement.service.BookCheckoutService;
 import com.venkatakrishnans.cs6360.librarymanagement.util.DateTimeUtility;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
 @Service
+@AllArgsConstructor
 public class BookCheckoutServiceImpl implements BookCheckoutService {
 
      //TO-DO change it to application property
      private static final int DEFAULT_BOOK_BORROWING_PERIOD = 14;
 
-     @Autowired
-     BookLoanRepository bookLoanRepository;
+     private final BookLoanRepository bookLoanRepository;
 
      @Override
      public void checkoutBookForBorrower(Book book, Borrower borrower) throws BookAlreadyCheckedOutException, MaximumCheckoutLimitReachedException {

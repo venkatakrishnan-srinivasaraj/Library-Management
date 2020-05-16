@@ -3,10 +3,11 @@ package com.venkatakrishnans.cs6360.librarymanagement.serviceimpl;
 import com.venkatakrishnans.cs6360.librarymanagement.domain.Book;
 import com.venkatakrishnans.cs6360.librarymanagement.domain.BookAuthorMap;
 import com.venkatakrishnans.cs6360.librarymanagement.domain.BookLoan;
-import com.venkatakrishnans.cs6360.librarymanagement.domain.BookStatusResponse;
+import com.venkatakrishnans.cs6360.librarymanagement.dto.BookStatusResponse;
 import com.venkatakrishnans.cs6360.librarymanagement.repository.BookAuthorMapRepository;
 import com.venkatakrishnans.cs6360.librarymanagement.repository.BookLoanRepository;
 import com.venkatakrishnans.cs6360.librarymanagement.service.BookSearchService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,13 +16,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class BookSearchServiceImpl implements BookSearchService {
 
-     @Autowired
-     private BookAuthorMapRepository bookAuthorMapRepository;
+     private final BookAuthorMapRepository bookAuthorMapRepository;
 
-     @Autowired
-     private BookLoanRepository bookLoanRepository;
+     private final BookLoanRepository bookLoanRepository;
 
      @Override
      public List<BookAuthorMap> getAllBooks() {

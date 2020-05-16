@@ -1,7 +1,7 @@
 package com.venkatakrishnans.cs6360.librarymanagement.service;
 
 import com.venkatakrishnans.cs6360.librarymanagement.domain.BookAuthorMap;
-import com.venkatakrishnans.cs6360.librarymanagement.domain.BookStatusResponse;
+import com.venkatakrishnans.cs6360.librarymanagement.dto.BookStatusResponse;
 
 import java.util.List;
 

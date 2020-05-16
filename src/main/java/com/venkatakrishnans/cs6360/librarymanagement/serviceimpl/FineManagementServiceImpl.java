@@ -1,34 +1,33 @@
 package com.venkatakrishnans.cs6360.librarymanagement.serviceimpl;
 
 import com.venkatakrishnans.cs6360.librarymanagement.domain.*;
+import com.venkatakrishnans.cs6360.librarymanagement.dto.FineByBorrower;
+import com.venkatakrishnans.cs6360.librarymanagement.dto.TotalFine;
 import com.venkatakrishnans.cs6360.librarymanagement.exception.InvalidPaymentAmountException;
 import com.venkatakrishnans.cs6360.librarymanagement.repository.BookLoanRepository;
 import com.venkatakrishnans.cs6360.librarymanagement.repository.FineRepository;
 import com.venkatakrishnans.cs6360.librarymanagement.service.BorrowerService;
 import com.venkatakrishnans.cs6360.librarymanagement.service.FineCalculatorService;
 import com.venkatakrishnans.cs6360.librarymanagement.service.FineManagementService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class FineManagementServiceImpl implements FineManagementService {
 
-    @Autowired
-    FineCalculatorService fineCalculatorService;
+    private final FineCalculatorService fineCalculatorService;
 
-    @Autowired
-    FineRepository fineRepository;
+    private final FineRepository fineRepository;
 
-    @Autowired
-    BorrowerService borrowerService;
+    private final BorrowerService borrowerService;
 
-    @Autowired
-    BookLoanRepository bookLoanRepository;
+    private final BookLoanRepository bookLoanRepository;
 
     @Override
     public void calculateAndUpdateFineForAllBookLoans() {

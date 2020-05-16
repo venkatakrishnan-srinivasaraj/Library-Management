@@ -1,31 +1,28 @@
 package com.venkatakrishnans.cs6360.librarymanagement.controller;
 
 import com.venkatakrishnans.cs6360.librarymanagement.domain.Book;
-import com.venkatakrishnans.cs6360.librarymanagement.domain.BookCheckoutRequest;
-import com.venkatakrishnans.cs6360.librarymanagement.domain.BookCheckoutResponse;
+import com.venkatakrishnans.cs6360.librarymanagement.dto.BookCheckoutRequest;
+import com.venkatakrishnans.cs6360.librarymanagement.dto.BookCheckoutResponse;
 import com.venkatakrishnans.cs6360.librarymanagement.domain.Borrower;
 import com.venkatakrishnans.cs6360.librarymanagement.exception.BookAlreadyCheckedOutException;
 import com.venkatakrishnans.cs6360.librarymanagement.exception.MaximumCheckoutLimitReachedException;
 import com.venkatakrishnans.cs6360.librarymanagement.service.BookCheckoutService;
 import com.venkatakrishnans.cs6360.librarymanagement.service.BookService;
 import com.venkatakrishnans.cs6360.librarymanagement.service.BorrowerService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/book/checkout")
+@AllArgsConstructor
 public class BookCheckoutController {
 
-    @Autowired
-    private BookCheckoutService bookCheckoutService;
+    private final BookCheckoutService bookCheckoutService;
 
-    @Autowired
-    private BookService bookService;
+    private final BookService bookService;
 
-    @Autowired
-    private BorrowerService borrowerService;
+    private final BorrowerService borrowerService;
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/")
     @PostMapping
     public BookCheckoutResponse checkoutBook(@RequestBody BookCheckoutRequest bookCheckoutRequest){

@@ -4,14 +4,15 @@ import com.venkatakrishnans.cs6360.librarymanagement.domain.Borrower;
 import com.venkatakrishnans.cs6360.librarymanagement.exception.SsnAlreadyExistsException;
 import com.venkatakrishnans.cs6360.librarymanagement.repository.BorrowerRepository;
 import com.venkatakrishnans.cs6360.librarymanagement.service.BorrowerManagementService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class BorrowerManagementServiceImpl implements BorrowerManagementService {
 
-     @Autowired
-     private BorrowerRepository borrowerRepository;
+     private final BorrowerRepository borrowerRepository;
 
      @Override
      public void createBorrower(Borrower borrower) throws SsnAlreadyExistsException {

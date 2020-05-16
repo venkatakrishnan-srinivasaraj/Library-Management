@@ -8,9 +8,6 @@ import java.util.concurrent.TimeUnit;
 public class DateTimeUtility {
 
     public static Date getCurrentDate() {
-
-//        return new Date(LocalDate.now().toEpochDay());
-
         return new Date();
     }
 

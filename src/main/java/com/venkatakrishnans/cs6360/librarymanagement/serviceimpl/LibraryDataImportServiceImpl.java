@@ -13,6 +13,7 @@ import com.venkatakrishnans.cs6360.librarymanagement.repository.BorrowerReposito
 import com.venkatakrishnans.cs6360.librarymanagement.service.LibraryDataImportService;
 import com.venkatakrishnans.cs6360.librarymanagement.util.BookAuthorCsvMap;
 import com.venkatakrishnans.cs6360.librarymanagement.util.BorrowerMap;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class LibraryDataImportServiceImpl implements LibraryDataImportService {
 
     //To-do change to application properties
@@ -32,17 +34,13 @@ public class LibraryDataImportServiceImpl implements LibraryDataImportService {
     //To-do change to application properties
     private static final String SAMPLE_CSV_FILE_PATH_BORROWER = "/Users/venkatakrishnansrinivasaraj/IdeaProjects/Library-Management/src/main/resources/data/borrowers.csv";
 
-    @Autowired
-    private BookAuthorMapRepository bookAuthorMapRepository;
+    private final BookAuthorMapRepository bookAuthorMapRepository;
 
-    @Autowired
-    private BookRepository bookRepository;
+    private final BookRepository bookRepository;
 
-    @Autowired
-    private AuthorRepository authorRepository;
+    private final AuthorRepository authorRepository;
 
-    @Autowired
-    private BorrowerRepository borrowerRepository;
+    private final BorrowerRepository borrowerRepository;
 
     @Override
     public void importBookAuthorDataFromFile() {

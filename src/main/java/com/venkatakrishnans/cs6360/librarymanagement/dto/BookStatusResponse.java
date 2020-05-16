@@ -1,5 +1,6 @@
-package com.venkatakrishnans.cs6360.librarymanagement.domain;
+package com.venkatakrishnans.cs6360.librarymanagement.dto;
 
+import com.venkatakrishnans.cs6360.librarymanagement.domain.BookAuthorMap;
 import lombok.Data;
 
 @Data

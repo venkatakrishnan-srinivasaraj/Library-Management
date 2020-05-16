@@ -6,6 +6,7 @@ import com.venkatakrishnans.cs6360.librarymanagement.domain.Fine;
 import com.venkatakrishnans.cs6360.librarymanagement.repository.FineRepository;
 import com.venkatakrishnans.cs6360.librarymanagement.service.FineCalculatorService;
 import com.venkatakrishnans.cs6360.librarymanagement.util.DateTimeUtility;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Service
+@AllArgsConstructor
 public class FineCalculatorServiceImpl implements FineCalculatorService {
 
      //TO-DO change it to application property
@@ -21,26 +23,25 @@ public class FineCalculatorServiceImpl implements FineCalculatorService {
      //TO-DO change it to application property
      private static final int DEFAULT_BOOK_BORROWING_PERIOD = 14;
 
-     @Autowired
-     FineRepository fineRepository;
+     private final FineRepository fineRepository;
 
      @Override
      public double calculateFineForBookLoan(BookLoan bookLoan) {
+          long durationInDaysOfBookBorrowed;
           if(bookLoan.getReturnDate()==null){
-               long durationInDaysOfBookBorrowed = DateTimeUtility.getDateDifferenceBetweenTwoDates(bookLoan.getCheckoutDate(),DateTimeUtility.getCurrentDate(), TimeUnit.DAYS);
+               durationInDaysOfBookBorrowed = DateTimeUtility.getDateDifferenceBetweenTwoDates(bookLoan.getCheckoutDate(), DateTimeUtility.getCurrentDate(), TimeUnit.DAYS);
                if(durationInDaysOfBookBorrowed>DEFAULT_BOOK_BORROWING_PERIOD){
                     double fine = durationInDaysOfBookBorrowed * FINE_PER_DAY;
                     return fine;
                }
-               return 0;
           }else{
-               long durationInDaysOfBookBorrowed = DateTimeUtility.getDateDifferenceBetweenTwoDates(bookLoan.getReturnDate(),bookLoan.getCheckoutDate(), TimeUnit.DAYS);
+               durationInDaysOfBookBorrowed = DateTimeUtility.getDateDifferenceBetweenTwoDates(bookLoan.getReturnDate(), bookLoan.getCheckoutDate(), TimeUnit.DAYS);
                if(durationInDaysOfBookBorrowed>DEFAULT_BOOK_BORROWING_PERIOD){
                     double fine = durationInDaysOfBookBorrowed * FINE_PER_DAY;
                     return fine;
                }
-               return 0;
           }
+          return 0;
      }
 
      @Override

@@ -1,4 +1,4 @@
-package com.venkatakrishnans.cs6360.librarymanagement.domain;
+package com.venkatakrishnans.cs6360.librarymanagement.dto;
 
 import lombok.Data;
 

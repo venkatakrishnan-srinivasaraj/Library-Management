@@ -21,13 +21,11 @@ public class BookCheckinController {
 
     private final BookLoanRepository bookLoanRepository;
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/search/{searchTerm}")
     public List<BookLoan> searchActiveBookLoans(@PathVariable String searchTerm){
        return bookCheckinService.searchCurrentlyActiveBookLoans(searchTerm);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/perform/{bookLoanId}")
     public String performCheckin(@PathVariable long bookLoanId){
         bookCheckinService.performCheckinOfBookLoan(bookLoanRepository.findByBookLoanId(bookLoanId));
